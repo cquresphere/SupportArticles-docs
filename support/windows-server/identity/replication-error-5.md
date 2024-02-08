@@ -110,7 +110,7 @@ Valid root causes for error 5: **access is denied** include:
 8. UDP formatted Kerberos packets are being fragmented by network infrastructure devices like routers and switches.
 9. The secure channel on the source or destination DC is invalid.
 10. Trust relationships in the trust chain are broken or invalid.
-11. The **KDCNames** setting in the `HKLM\System\CurrentControlSet\Control\LSA\Kerberos\Domains` section of the registry incorrectly contains the local Active Directory domain name.
+11. The **KDCNames** setting in the `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\LSA\Kerberos\Domains` section of the registry incorrectly contains the local Active Directory domain name.
 12. Some network adapters have a **Large Send Offload** feature.
 13. Antivirus software that uses a mini-firewall network adapter filter driver on the source or destination DC.
 
@@ -200,7 +200,7 @@ The generic DCDIAG runs multiple tests.
 
 3. `CrashOnAuditFail` = **2**  
 
-    AD Replication fails when `HKLM\System\CurrentControlSet\Control\LSA\CrashOnAuditFail` = has a value of **2**,
+    AD Replication fails when `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\LSA\CrashOnAuditFail` = has a value of **2**,
 
     A `CrashOnAduitFail` value of **2** is triggered when the **Audit: Shut down system immediately if unable to log security audits** setting in Group Policy has been enabled, and the local security event log becomes full.
 
@@ -208,7 +208,7 @@ The generic DCDIAG runs multiple tests.
 
     User Action:
 
-    If `HKLM\System\CCS\Control\LSA\CrashOnAuditFail` = **2**:
+    If `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\CrashOnAuditFail` = **2**:
 
     - Clear the security event log (save to alternate location as required)
     - Re-evalaute any size constraints on the security event log, including policy-based settings.
@@ -265,10 +265,10 @@ The generic DCDIAG runs multiple tests.
 
     |Policy setting|Registry Path|
     |---|---|
-    |Microsoft network client: Digitally sign communications (if server agrees)|HKLM\SYSTEM\CCS\Services\Lanmanworkstation\Parameters\Enablesecuritysignature|
-    | Microsoft network client: Digitally sign communications (always)|HKLM\SYSTEM\CCS\Services\Lanmanworkstation\Parameters\Requiresecuritysignature|
-    | Microsoft network server: Digitally sign communications (if server agrees)|HKLM\SYSTEM\CCS\Services\Lanmanserver\Parameters\Enablesecuritysignature|
-    | Microsoft network server: Digitally sign communications (always)|HKLM\SYSTEM\CCS\Services\Lanmanserver\Parameters\Requiresecuritysignature|
+    |Microsoft network client: Digitally sign communications (if server agrees)|HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Lanmanworkstation\Parameters\Enablesecuritysignature|
+    | Microsoft network client: Digitally sign communications (always)|HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Lanmanworkstation\Parameters\Requiresecuritysignature|
+    | Microsoft network server: Digitally sign communications (if server agrees)|HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Lanmanserver\Parameters\Enablesecuritysignature|
+    | Microsoft network server: Digitally sign communications (always)|HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Lanmanserver\Parameters\Requiresecuritysignature|
 
     Focus on SMB signing mismatches between the destination and source domain controllers with the classic cases being the setting enabled or required on one side but disabled on the other.
 
@@ -378,8 +378,8 @@ The generic DCDIAG runs multiple tests.
     User Action:
 
     - On the console of the destination DC, run REGEDIT.
-    - Locate the following path in the registry: `HKLM\system\ccs\control\lsa\kerberos\domains`.
-    - For each \<fully qualified domain> under `HKLM\system\ccs\control\lsa\kerberos\domains`, verify that the value for `KdcNames` refers to a valid external Kerberos realm and NOT the local domain or another domain in the same Active Directory forest.
+    - Locate the following path in the registry: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\kerberos\domains`.
+    - For each \<fully qualified domain> under `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\kerberos\domains`, verify that the value for `KdcNames` refers to a valid external Kerberos realm and NOT the local domain or another domain in the same Active Directory forest.
 
 5. Network Adapters with **IPv4 Large Send Offload** enabled:
 
