@@ -126,7 +126,7 @@ Active Directory errors and events like those cited in the symptoms section of t
 AD Replication failing with error 5 has multiple root causes. Solve the problem initially using tools like:
 
 - DCDIAG
-- DCDIAG /TEST: CheckSecurityError
+- DCDIAG /TEST:CheckSecurityError
 - NETDIAG that exposes common problems
 
 If still unresolved, walk the known causes list in most common, least complex, least disruptive order to least common, most complex, most disruptive order.
